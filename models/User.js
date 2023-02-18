@@ -5,6 +5,7 @@ const schema = new Schema({
     username: {type: String, required:true},
     email: {type:String, required:true},
     password: {type:String, required:true},
+    boughtCryptos: {type:String,enum: ["crypto-wallet", "credit-card", "debit-card", "paypal"], required: true, ref:"Crypto"}
 });
 
 const User = model("User", schema);

@@ -1,6 +1,11 @@
-<h1>Login Page</h1>
-<form action="/login" method="post">
-    <input type="text" name="email"><br>
-    <input type="password" name="password"><br>
-    <button>Login</button>
-</form>
+<div class="login-box">
+    <h1>Login</h1>
+    <form action="/login" method="post">
+        <label>Email</label>
+        <input type="text" name="email" placeholder="Email.." value="{{body.email}}">
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Password..">
+        <input type="submit" value="Submit">
+    </form>
+    <p>Not have an account? <a href="/register">Register here</a></p>
+</div>

@@ -2,7 +2,7 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const { createToken } = require("../utils/tokenUtil");
 
-// TODO
+
 async function register(username, email, password, repPass){
     if(repPass != password){
         throw new Error("Passwords don't match");
@@ -11,9 +11,14 @@ async function register(username, email, password, repPass){
     }else if(await User.findOne({email:email})){
         throw new Error("Already have user with this email",);
     }else if(password.length < 5){
-        throw new Error("Password must be at least 5 chars");
-    }else if(!/^[a-zA-Z0-9]+$/.test(password)){
-        throw new Error("Password must consist only english letters and digits");
+        const message = errorMessage("Password", 4);
+        throw new Error(message);
+    }else if(username.length < 5){
+        const message = errorMessage("Username", 5);
+        throw new Error(message);
+    }else if(email.length < 10){
+        const message = errorMessage("Email", 10);
+        throw new Error(message);
     }else{
         const hashedPass = await bcrypt.hash(password, 9);
         const user = await User.create({
@@ -27,7 +32,7 @@ async function register(username, email, password, repPass){
     }
 };
 
-// TODO 
+
 async function login(email, password){
     const user = await User.findOne({email:email});
 
@@ -37,6 +42,10 @@ async function login(email, password){
 
     return createToken({username:user.username, id: user._id});
 };
+
+const errorMessage = (title, characters) => {
+    return `${title} must be at least ${characters} characters`;
+}
 
 module.exports = {
     register,

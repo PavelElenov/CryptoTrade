@@ -1,8 +1,16 @@
-<h1>Register Page</h1>
-<form action="/register" method="post">
-    <div><input type="text" name="username" placeholder="Username"></div>
-    <div><input type="text" name="email" placeholder="Email"></div>
-    <div><input type="password" name="password" placeholder="Password"></div>
-    <div><input type="password" name="rePass" placeholder="Repass"></div>
-    <button>Register</button>
-</form>
+<div class="register-box">
+    <h1>Register</h1>
+    <h4>It's free and only take a minute</h4>
+    <form action="/register" method="post">
+        <label>Username</label>
+        <input type="text" name="username" placeholder="Username.." value="{{body.username}}">
+        <label>Email</label>
+        <input type="text" name="email" placeholder="Email.." value="{{body.email}}">
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Password..">
+        <label>Confirm Password</label>
+        <input type="password" name="rePassword" placeholder="Confirm Password..">
+        <input type="submit" value="Submit">
+    </form>
+    <p>Already have an account? <a href="#">Login here</a></p>
+</div>
