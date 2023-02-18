@@ -4,7 +4,7 @@ module.exports = async () => {
     mongoose.set({strictQuery:false});
 
     //TODO change database name
-    await mongoose.connect("mongodb://127.0.0.1:27017/Shablon", {
+    await mongoose.connect("mongodb://127.0.0.1:27017/CryptoDb", {
         useUnifiedTopology: true,
         useNewUrlParser:true,
     }, (error) => {

@@ -5,7 +5,7 @@ const router = require("express").Router();
 
 router.get("/", (req, res) => {
     res.render("home", {
-        title:"Home Page",
+        title:"Home Page - Crypto Web",
     })
 })
 router.get("/login", (req, res) => {
@@ -30,13 +30,14 @@ router.post("/login", async(req, res) => {
         res.render("login", {
             title: "Login Page",
             error,
+            body: req.body,
         })
     }
 });
 
 router.post("/register", async(req, res) => {
     try{
-        const token = await register(req.body.username, req.body.email, req.body.password, req.body.rePass);
+        const token = await register(req.body.username, req.body.email, req.body.password, req.body.rePassword);
         res.cookie("token", token);
         res.redirect("/");
     }catch(err){
@@ -44,6 +45,7 @@ router.post("/register", async(req, res) => {
         res.render("register", {
             title: "Register Page",
             error,
+            body: req.body,
         })
     }
 });

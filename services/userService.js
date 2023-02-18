@@ -10,11 +10,11 @@ async function register(username, email, password, repPass){
         throw new Error("Already have user with this username");
     }else if(await User.findOne({email:email})){
         throw new Error("Already have user with this email",);
-    }else if(password.length < 5){
-        const message = errorMessage("Password", 4);
-        throw new Error(message);
     }else if(username.length < 5){
         const message = errorMessage("Username", 5);
+        throw new Error(message);
+    }else if(password.length < 4){
+        const message = errorMessage("Password", 4);
         throw new Error(message);
     }else if(email.length < 10){
         const message = errorMessage("Email", 10);
@@ -47,9 +47,21 @@ const errorMessage = (title, characters) => {
     return `${title} must be at least ${characters} characters`;
 }
 
+const getUserById = async (id) => {
+    return await User.findById(id);
+}
+const buyCrypto = async(userId, cryptoId) => {
+    const user = await User.findById(userId);
+
+    user.boughtCryptos.push(cryptoId);
+    user.save();
+}
+
 module.exports = {
     register,
     login,
+    getUserById,
+    buyCrypto,
 }
 
 
